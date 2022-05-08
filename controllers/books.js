@@ -9,14 +9,7 @@ module.exports.newForm =
     (req, res) => {   
     res.render('books/new');
 }
-module.exports.newBook = async(req, res,next)=>{
-    const book = new Book(req.body.book)
-      book.addedBy = await req.user._id
-    await   book.save()
-    req.flash('success','new book has been added')
-    res.redirect(`/books/${book._id}`)
 
-}
 
 
 module.exports.showBook =

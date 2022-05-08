@@ -9,6 +9,7 @@ const {isLoggedIn}= require('../middleware')
 const books = require('../controllers/books')
 
 const validateBook= (req, res, next) => {
+    console.log(req.body.book)
     const { error } = bookSchema.validate(req.body);
     if (error) {
         const msg = error.details.map(el => el.message).join(',')
@@ -21,7 +22,16 @@ const validateBook= (req, res, next) => {
 
 router.route('/')
 .get(catchAsync(books.index))
-.post(validateBook  ,catchAsync(books.newBook))
+
+router.post('/',catchAsync(async(req, res,next)=>{
+    const book = new Book(req.body.book)
+    console.log(req.body.book)
+    //   book.addedBy =  req.user._id
+    await   book.save()
+    req.flash('success','new book has been added')
+    res.redirect(`/books/${book._id}`)
+}))
+
 
 router.get('/new', isLoggedIn , books.newForm)
 

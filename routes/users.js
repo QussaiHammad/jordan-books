@@ -20,4 +20,13 @@ router.route('/login')
 
 router.get('/logout',users.userLogout)
 
+
+router.get('/mycart',(req,res)=>{
+    res.render('users/myCart')
+})
+
+router.get('/myorders',(req,res)=>{
+    res.render('users/myOrders')
+})
+
 module.exports = router;
