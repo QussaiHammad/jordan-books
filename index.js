@@ -18,7 +18,7 @@ const upload = multer({dest:'upload/'})
 const sanitize = require('express-mongo-sanitize')
 const helmet = require("helmet");
 
-
+//
 //for errors handeling
 const catchAsync = require('./utils/catchAsync');
 const ExpressError = require('./utils/ExpressError');
@@ -152,7 +152,7 @@ app.use((err, req, res, next) => {
     if (!err.message) err.message = 'Oh No, Something Went Wrong!'
     res.status(statusCode).render('error', { err })
 })
-const port= process.env.PORT
+const port= process.env.PORT || 3000
 app.listen(port, () => {
     console.log(`Serving on port ${port}`)
 })
