@@ -4,8 +4,9 @@
     <h1>The Books</h1>
     <br>
     <br>
+    <div class="row row-cols-1 row-cols-md-3 g-4 mb-3">
   <% for (let book of books){%>
-            <div class="card-group  mb-3" style="width: 18rem;">
+            <!-- <div class="card-group  mb-3" style="width: 18rem;"> -->
               <!-- <div class="card-group">
                 <div class="card">
                   <img src="<%= book.image %> " class="card-img-top" alt="the image is not found">
@@ -29,7 +30,7 @@
                   </ul>
                   </div>
                 </div> -->
-                <img src="<%= book.image %> " class="card-img-top" alt="...">
+                <!-- <img src="<%= book.image %> " class="card-img-top" alt="...">
                 <div class="card-body ">
                   <h5 class="card-title"><%= book.name %> </h5>
                   <p class="card-text"><%= book.about %> </p>
@@ -57,8 +58,66 @@
                 </div>
               </div>
       
-            
-                
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+  <div class="col">
+    <div class="card">
+      <img src="..." class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card">
+      <img src="..." class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card">
+      <img src="..." class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card">
+      <img src="..." class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
+    <div class="card">
+      <img src="<%= book.image %> " class="card-img-top img-thumbnail"  >
+      <div class="card-body">
+        <h4 class="card-title"><%= book.name %>  </h5>
+        <ul class="list-group list-group-flush">
+          <%  if( book.instock >  0){ %>
+            <li class="list-group-item"><button type="button" class="btn btn-success btn-sm">in stock</button></li>
+           <% }else{%>
+            <li class="list-group-item"><button type="button" class="btn btn-danger btn-sm">run out</button></li>
+            <% }  %> 
+          <li class="list-group-item"> <b>Author:</b> <%= book.author %> </li>
+          <li class="list-group-item"><b>Price: </b> <%= book.price %>$ </li>
+        </ul>
+     
+          <a href="/books/<%= book._id %>" class="btn btn-primary">More</a>
+          <a href="/books/<%= book._id %>" class="btn btn-success">Add to cart</a>
+      
+       
+      </div>
+    </div>
         <% }%>
-        
+      </div>
  

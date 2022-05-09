@@ -2,7 +2,7 @@
 <div class="row">
     <h1 class="text-center">New Book</h1>
 <div class="col-6 offset-3">    
-    <form action="/books" method="POST" novalidate class="form" enctype="multipart/form-data">
+    <form action="/books" method="POST" novalidate class="form" >
     <div class="md-3">
      <label for="name" class="form-label">Name:</label>
      <input  class="form-control"   type="text" name="book[name]" id="name"required>
@@ -42,3 +42,17 @@
 </form> 
  
 
+<!-- <form action="/books" method="POST" novalidate class="form" enctype="multipart/form-data">
+    <fieldset >
+      <legend>Disabled fieldset example</legend>
+      <div class="mb-3">
+        <label for="name" class="form-label">Disabled input</label>
+        <input type="text" id="name" class="form-control" name="book[name]" required>
+        <div class="valid-feedback">looks good!</div>
+      </div>
+      
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </fieldset>
+  </form> -->
+
+ 
