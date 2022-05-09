@@ -23,6 +23,8 @@ const validateBook= (req, res, next) => {
 router.route('/')
 .get(catchAsync(books.index))
 
+
+
 router.post('/',catchAsync(async(req, res,next)=>{
     const book = new Book(req.body.book)
     console.log(req.body.book)
@@ -32,9 +34,11 @@ router.post('/',catchAsync(async(req, res,next)=>{
     res.redirect(`/books/${book._id}`)
 }))
 
+router.get('/theorders',isLoggedIn,catchAsync((req,res)=>{
+    res.render('books/theOrders')
+}))
 
 router.get('/new', isLoggedIn , books.newForm)
-
 router.route('/:id')
 .get(catchAsync(books.showBook))
 .put(isLoggedIn,validateBook,catchAsync(books.updateBook))

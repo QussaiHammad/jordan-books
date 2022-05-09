@@ -4,7 +4,7 @@ const passport = require('passport');
 const User = require('../models/user');
 const { render } = require('express/lib/response');
 const users = require('../controllers/users')
-
+const {isLoggedIn}= require('../middleware')
 const catchAsync = require('../utils/catchAsync');
 
 
@@ -21,11 +21,11 @@ router.route('/login')
 router.get('/logout',users.userLogout)
 
 
-router.get('/mycart',(req,res)=>{
+router.get('/mycart',isLoggedIn,(req,res)=>{
     res.render('users/myCart')
 })
 
-router.get('/myorders',(req,res)=>{
+router.get('/myorders',isLoggedIn,(req,res)=>{
     res.render('users/myOrders')
 })
 

@@ -141,7 +141,6 @@ app.use('/', userRoutes)
 app.get('/',(req,res)=>{
     res.render('home')
 })
-// app.post('/books',async(req, res,next)=>{
 
 
 app.all('*', (req, res, next) => {
