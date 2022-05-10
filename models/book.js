@@ -10,16 +10,16 @@ const BookSchema = new Schema({
     author:String,
     image: String,
     about: String,
-    addedBy: {
-        type: Schema.Types.ObjectId,
-        ref: 'User'
-    },
     reviews: [
       {
           type: Schema.Types.ObjectId,
           ref: 'Review'
       }
-  ]
+  ],
+  admin: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    }
   });
   
   BookSchema.post('findOneAndDelete', async function (doc) {

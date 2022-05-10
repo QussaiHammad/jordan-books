@@ -1,42 +1,43 @@
 <% layout('layouts/boilerplate') %> 
 <link rel="stylesheet" href="/stylesheets/stars.css">
-<div class="row">
-   <div class="col-3  ">
-       <div class="card mb-3">
-           <img src="<%= book.image%>" class="card-img-top" alt="...">
-           <div class="card-body">
-               <h5 class="card-title"><%= book.name%></h5>
-               <p class="card-text"><%= book.about%></p>
-           </div>
-           <ul class="list-group list-group-flush">
-               <li class="list-group-item ">Author: <%= book.author%></li>
-                  <li class="list-group-item"><%  if( book.instock >  0){ %>
-                     <button type="button" class="btn btn-success btn-sm">in stock</button>
-                    <% }else{%>
-                     <button type="button" class="btn btn-danger btn-sm">run out</button>
-                     <% }  %>  </li>
-               <li class="list-group-item">$ <%= book.price %> </li>
-           </ul>
-           
-           <% if( currentUser )  {%>
-           <div class="card-body">
-               <a class="card-link btn btn-info" href="/books/<%=book._id%>/edit">Edit</a>
-               <form class="d-inline" action="/books/<%=book._id%>?_method=DELETE" method="POST">
-                   <button class="btn btn-danger">Delete</button>
-               </form>
-            </div>
-           <%} %> 
-           
-       </div>
-   </div>
+
+<div class="card mb-3" style="max-width: 1000px;">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="<%= book.image %> " class="img-fluid rounded-start" alt="...">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title"><%= book.name %> </h5>
+          <p class="card-text"><%= book.about %> </p>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item "><b>Author: </b> <%= book.author%></li>
+            <li class="list-group-item "><b>Submitted By:</b> <%= book.admin.username%></li>
+               <li class="list-group-item"><%  if( book.instock >  0){ %>
+                  <button type="button" class="btn btn-success btn-sm">in stock</button>
+                 <% }else{%>
+                  <button type="button" class="btn btn-danger btn-sm">run out</button>
+                  <% }  %>  </li>
+            <li class="list-group-item">$ <%= book.price %> </li>
+        </ul>
+        
+        <% if( currentUser )  {%>
+        <div class="card-body">
+            <a class="card-link btn btn-info" href="/books/<%=book._id%>/edit">Edit</a>
+            <form class="d-inline" action="/books/<%=book._id%>?_method=DELETE" method="POST">
+                <button class="btn btn-danger">Delete</button>
+            </form>
+         </div>
+        <%} %> 
+        </div>
+      </div>
+    </div>
+  </div>
+
    <div class="col-6  ">
     <form action="/books/<%=book._id%>/reviews" method="POST" class="mb-3 form" novalidate >
     <% if (currentUser) { %>
         <h2>Leave a Review</h2> 
-    <!-- <div class="mb-3">
-        <label class="form-label" for="rating">Rating</label>
-        <input class="form-range" type="range" min="1" max="5" name="review[rating]" id="rating">
-    </div> -->
     <fieldset class="starability-basic">
         <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked
             aria-label="No rating." />
@@ -65,16 +66,22 @@
 <% for(let review of book.reviews) { %>
 <div class="card mb-3 ">
 <div class="card-body">
-    <p class="starability-result" data-rating="<%=review.rating%>">
-        Rated: <%= review.rating %> stars
-    </p>
-    <p class="card-text">Review: <%= review.body %></p>
-    <form action="/books/<%= book._id%>/reviews/<%=review._id%>?_method=DELETE" method="POST"> 
+   <b><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+  </svg> <%= review.user.username %> </b>
+ <div></div>
+   <p class="card-text"> <%= review.body %></p>
+   <p class="starability-result" data-rating="<%=review.rating%>">
+       Rated: <%= review.rating %> stars
+   </p>
+   <%  if(currentUser && review.user.equals(currentUser._id))  {%>
+   <form action="/books/<%= book._id%>/reviews/<%=review._id%>?_method=DELETE" method="POST"> 
         <% if (currentUser) { %>
             <button class="btn btn-sm btn-danger">Delete</button>
+            
+        </form>
         <% } %>
-     
-    </form>
+    <% } %> 
 </div>
 </div> 
 <% } %></div>

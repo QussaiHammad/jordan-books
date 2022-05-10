@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const catchAsync = require('../utils/catchAsync');
-const ExpressError = require('../utils/ExpressError');
 const Book = require('../models/book.js');
 const User = require('../models/user.js');
+const catchAsync = require('../utils/catchAsync');
+const ExpressError = require('../utils/ExpressError');
 const {bookSchema}= require('../sc')
 const {isLoggedIn , validateBook}= require('../middleware')
 const books = require('../controllers/books')
-
+const passport = require('passport');
 // const validateBook= (req, res, next) => {
 //     console.log(req.body.book)
 //     const { error } = bookSchema.validate(req.body);
@@ -22,17 +22,10 @@ const books = require('../controllers/books')
 
 router.route('/')
 .get(catchAsync(books.index))
+.post(catchAsync(books.addBook))
 
 
 
-// app.post('/',async(req, res,next)=>{
-//     const book = new Book(req.body.book)
-//     console.log(req.body.book)
-//     //   book.addedBy =  req.user._id
-//     await   book.save()
-//     req.flash('success','new book has been added')
-//     res.redirect(`/books/${book._id}`)
-// })
 
 router.get('/theorders',isLoggedIn,catchAsync((req,res)=>{
     res.render('books/theOrders')

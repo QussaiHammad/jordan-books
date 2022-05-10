@@ -3,7 +3,7 @@ const Book = require('../models/book');
 module.exports.postReview=async(req,res)=>{
     const book = await Book.findById(req.params.id)
     const review = new Review(req.body.review);
-    book.addedBy = await req.user._id
+    review.user = req.user._id
     book.reviews.push(review);
     await review.save();
     await book.save();

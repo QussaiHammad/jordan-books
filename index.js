@@ -132,27 +132,18 @@ app.use((req, res, next) => {
     next();
 })
 
-app.post('/books',async(req, res , next)=>{
-    console.log(req.body)
-    const book = new Book(req.body.book)
-    
-    //   book.addedBy =  req.user._id
-    await   book.save()
-    req.flash('success','new book has been added')
-    res.redirect(`/books/${book._id}`)
-})
 
 //use the routing that we have 
 app.use('/books', booksRoutes)
 app.use('/books/:id/reviews',reviewsRoutes )
 app.use('/', userRoutes)
 
+
+
 app.get('/',(req,res)=>{
     res.render('home')
 })
-// app.get('/test'(req,res)=>{
-//     render()
-// })
+
 
 app.all('*', (req, res, next) => {
     next(new ExpressError('Page Not Found', 404))
@@ -163,7 +154,7 @@ app.use((err, req, res, next) => {
     if (!err.message) err.message = 'Oh No, Something Went Wrong!'
     res.status(statusCode).render('error', { err })
 })
-const port= process.env.PORT || 5000
+const port= process.env.PORT || 3000
 app.listen(port, () => {
     console.log(`Serving on port ${port}`)
 })
