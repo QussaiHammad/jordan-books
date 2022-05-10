@@ -5,7 +5,7 @@ const User = require('../models/user.js');
 const catchAsync = require('../utils/catchAsync');
 const ExpressError = require('../utils/ExpressError');
 const {bookSchema}= require('../sc')
-const {isLoggedIn , validateBook}= require('../middleware')
+const {isLoggedIn , validateBook,isAdmin}= require('../middleware')
 const books = require('../controllers/books')
 const passport = require('passport');
 // const validateBook= (req, res, next) => {
@@ -22,7 +22,7 @@ const passport = require('passport');
 
 router.route('/')
 .get(catchAsync(books.index))
-.post(catchAsync(books.addBook))
+.post(isLoggedIn,catchAsync(books.addBook))
 
 
 
@@ -31,7 +31,7 @@ router.get('/theorders',isLoggedIn,catchAsync((req,res)=>{
     res.render('books/theOrders')
 }))
 
-router.get('/new', isLoggedIn , books.newForm)
+router.get('/new', isAdmin,isLoggedIn , books.newForm)
 router.route('/:id')
 .get(catchAsync(books.showBook))
 .put(isLoggedIn,validateBook,catchAsync(books.updateBook))

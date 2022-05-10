@@ -22,11 +22,15 @@
         </ul>
         
         <% if( currentUser )  {%>
-        <div class="card-body">
-            <a class="card-link btn btn-info" href="/books/<%=book._id%>/edit">Edit</a>
-            <form class="d-inline" action="/books/<%=book._id%>?_method=DELETE" method="POST">
+          <div class="card-body">
+            <% if ( currentUser._id.equals( book.admin._id)) { %>
+              <a class="card-link btn btn-info" href="/books/<%=book._id%>/edit">Edit</a>
+              <form class="d-inline" action="/books/<%=book._id%>?_method=DELETE" method="POST">
                 <button class="btn btn-danger">Delete</button>
-            </form>
+              </form>
+             
+            <% } %>
+
          </div>
         <%} %> 
         </div>
