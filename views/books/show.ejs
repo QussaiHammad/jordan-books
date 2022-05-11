@@ -12,13 +12,15 @@
           <p class="card-text"><%= book.about %> </p>
           <ul class="list-group list-group-flush">
             <li class="list-group-item "><b>Author: </b> <%= book.author%></li>
+            <li class="list-group-item"><b>Price</b> <%= book.price %>$ </li>
             <li class="list-group-item "><b>Submitted By:</b> <%= book.admin.username%></li>
                <li class="list-group-item"><%  if( book.instock >  0){ %>
                   <button type="button" class="btn btn-success btn-sm">in stock</button>
                  <% }else{%>
                   <button type="button" class="btn btn-danger btn-sm">run out</button>
                   <% }  %>  </li>
-            <li class="list-group-item">$ <%= book.price %> </li>
+          
+               
         </ul>
         
         <% if( currentUser )  {%>
@@ -28,7 +30,6 @@
               <form class="d-inline" action="/books/<%=book._id%>?_method=DELETE" method="POST">
                 <button class="btn btn-danger">Delete</button>
               </form>
-             
             <% } %>
 
          </div>
@@ -87,6 +88,7 @@
         <% } %>
     <% } %> 
 </div>
+
 </div> 
 <% } %></div>
 </div>

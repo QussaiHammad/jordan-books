@@ -13,8 +13,14 @@
             <a class="nav-link " aria-current="page" href="/books">Books</a>
           </li>
                
-         <li>  <a class="nav-link" href="/mycart">My Cart</a></li>
-          <li><a class="nav-link" href="/myorders">My Orders</a></li>
+            <% if (!currentUser) { %>
+              <li><a class="nav-link" href="/login">My Cart</a></li>
+              <li><a class="nav-link" href="/login">My Orders</a></li>
+
+              <% }else {%>
+                <li><a class="nav-link" href="/mycart/<%=currentUser._id%>">My Cart</a></li>
+                <li><a class="nav-link" href="/myorders">My Orders</a></li>
+              <% } %> 
         </ul>
       </div>
       <div class="navbar-nav ml-auto">

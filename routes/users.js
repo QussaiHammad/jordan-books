@@ -21,12 +21,5 @@ router.route('/login')
 router.get('/logout',users.userLogout)
 
 
-router.get('/mycart',isLoggedIn,(req,res)=>{
-    res.render('users/myCart')
-})
-
-router.get('/myorders',isLoggedIn,(req,res)=>{
-    res.render('users/myOrders')
-})
 
 module.exports = router;

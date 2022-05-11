@@ -8,7 +8,13 @@ const UserSchema = new Schema({
         required: true,
         unique: true
     },
-    location: String
+    location: String,
+    cart: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Cart'
+        }
+    ]
 });
 
 UserSchema.plugin(passportLocalMongoose);
