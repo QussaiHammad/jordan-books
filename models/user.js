@@ -14,6 +14,12 @@ const UserSchema = new Schema({
             type: Schema.Types.ObjectId,
             ref: 'Cart'
         }
+    ],
+    order: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Order'
+        }
     ]
 });
 

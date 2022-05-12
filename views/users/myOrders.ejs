@@ -1,2 +1,36 @@
 <% layout('layouts/boilerplate') %> 
 <h1>My Orders</h1>
+
+<p class="card-text"><small class="text-muted"><b>Delivering to: </b><%= user.username %></small></p>
+<p class="card-text"><small class="text-muted"><b>Location: </b><%= user.location %></small></p>
+<p class="card-text"><small class="text-muted"><b>E-mail: </b><%= user.email %></small></p>
+<% for( let orders of user.order ) { %>
+  <h4>the order state: 
+<% if ( orders.state  === 'Accepted'){ %>
+    <button type="button" class="btn btn-primary btn-sm">Accepted</button>
+  <% }else{ %>
+    <button type="button" class="btn btn-success btn-sm">Delivered</button>
+    <% } %>  
+ </h4>
+
+<% for( let cart of orders.carts ) { %>
+     <div class="row row-cols-1 row-cols-md-5 g-10 mb-3">
+<% for(  let book of cart.books ) { %>
+       
+          <div class="card">
+            <img src="<%= book.image %> " class="card-img-top img-thumbnail"  >
+            <div class="card-body">
+              <h4 class="card-title"><%= book.name %>  </h5>
+              <ul class="list-group list-group-flush">
+                <% const i = 0  %>
+                
+                <li class="list-group-item"> <b>Author:</b> <%= book.author %> </li>
+                <li class="list-group-item"><b>Price: </b> <%= book.price %>$</li>
+              </ul>
+      </div>
+      </div> 
+      
+<% } %> 
+</div>
+<% } %>
+<% } %>

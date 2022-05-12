@@ -34,6 +34,7 @@ const booksRoutes = require('./routes/books')
 const userRoutes= require('./routes/users')
 const reviewsRoutes= require('./routes/reviews')
 const cartRoutes= require('./routes/cart')
+const ordersRoutes= require('./routes/orders')
 const db_url= process.env.DB_URL
 
 // mongodb://localhost:27017/jordan-books
@@ -139,6 +140,7 @@ app.use('/', userRoutes)
 app.use('/books', booksRoutes)
 app.use('/books/:id/reviews',reviewsRoutes )
 app.use('/mycart', cartRoutes)
+app.use('/myorders',ordersRoutes )
 
 
 
@@ -146,12 +148,6 @@ app.get('/',(req,res)=>{
     res.render('home')
 })
 
-// app.get('/myorders',isLoggedIn,(req,res)=>{
-//     res.render('users/myOrders')
-// })
-// app.get('/theorders',isLoggedIn,catchAsync((req,res)=>{
-//     res.render('books/theOrders')
-// }))
 app.all('*', (req, res, next) => {
     next(new ExpressError('Page Not Found', 404))
 })
