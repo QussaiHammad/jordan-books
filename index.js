@@ -35,6 +35,7 @@ const userRoutes= require('./routes/users')
 const reviewsRoutes= require('./routes/reviews')
 const cartRoutes= require('./routes/cart')
 const ordersRoutes= require('./routes/orders')
+const theordersRoutes= require('./routes/theorders')
 const db_url= process.env.DB_URL
 
 // mongodb://localhost:27017/jordan-books
@@ -141,6 +142,8 @@ app.use('/books', booksRoutes)
 app.use('/books/:id/reviews',reviewsRoutes )
 app.use('/mycart', cartRoutes)
 app.use('/myorders',ordersRoutes )
+app.use('/theorders',theordersRoutes )
+
 
 
 

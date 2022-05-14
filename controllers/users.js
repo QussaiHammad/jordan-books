@@ -1,6 +1,6 @@
 const User = require('../models/user');
 const passport = require('passport');
-
+const Cart = require('../models/cart')
 module.exports.userLogin= (req, res) => {
     const redirectUrl = req.session.returnTo || '/books';
     delete req.session.returnTo;
@@ -31,6 +31,7 @@ module.exports.userRegister= async(req, res) => {
     } catch (e) {
         res.redirect('/register');
     }
+
 }
 module.exports.showRegister =(req, res) => {
     res.render('users/register');

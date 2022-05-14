@@ -1,0 +1,54 @@
+<% layout('layouts/boilerplate') %>
+  <h1>The Orders</h1>
+  <br><br>
+<% for(let orders of order) { %>
+    <h4>the order state: 
+        <% if ( orders.state  === 'Accepted'){ %>
+            <button type="button" class="btn btn-primary btn-sm">Accepted</button>
+          <% }else{ %>
+            <button type="button" class="btn btn-success btn-sm">Delivered</button>
+            <% } %>  
+         </h4>  
+<% for( let user of orders.user) { %>
+
+<% for( let cart of orders.carts ) { %>
+
+    <div class="row row-cols-1 row-cols-md-5 g-10 mb-3">
+        <% for(  let book of cart.books ) { %>
+               
+                  <div class="card">
+                    <img src="<%= book.image %> " class="card-img-top img-thumbnail"  >
+                    <div class="card-body">
+                      <h4 class="card-title"><%= book.name %>  </h5>
+                      <ul class="list-group list-group-flush">
+                        <% const i = 0  %>
+                        
+                        <li class="list-group-item"> <b>Author:</b> <%= book.author %> </li>
+                        <li class="list-group-item"><b>Price: </b> <%= book.price %>$</li>
+                      </ul>
+              </div>
+              </div> 
+              
+        <% } %> 
+        </div>
+
+        <p class="card-text"><small class="text-muted"><b>Delivering to: </b><%= user.username %></small></p>
+        <p class="card-text"><small class="text-muted"><b>Location: </b><%= user.location %></small></p>
+        <p class="card-text"><small class="text-muted"><b>E-mail: </b><%= user.email %></small></p> 
+       
+        <% if ( orders.state  === 'Accepted'){ %>
+            <form  method="post" action="/theorders/<%= orders._id %>">
+                <button  class="btn btn-success">Delivered  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmark-check-fill" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5zm8.854-9.646a.5.5 0 0 0-.708-.708L7.5 7.793 6.354 6.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
+                  </svg>
+                  </button>
+            </form>
+          <% } %>
+         
+          
+<br> <br>
+<% } %>
+<% } %>
+
+<% } %>
+    
