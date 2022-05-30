@@ -58,13 +58,13 @@ router.get('/:id',isLoggedIn,async(req,res)=>{
     total = total + price
 }
 
-res.render('users/myCart',{usercart,total})
+res.render('users/myCart',{usercart,total,user})
 })
 
 
 router.post('/add-to-orders/:userid/:cartid',async(req,res)=>{
-const userid = req.params.userid
-const cartid = req.params.cartid
+const userid = await  req.params.userid
+const cartid = await req.params.cartid
 const user = await User.findById(userid)
 const cart = await Cart.findById(cartid)
 const order = await  new Order
@@ -77,6 +77,5 @@ const newcart = await  new Cart
 user.cart =  await newcart._id
 await   newcart.save()
 await user.save()
-req.flash('success','a your order was placed ')
-res.redirect(`/myorders/${user._id}`)
+
 })

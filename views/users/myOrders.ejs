@@ -1,9 +1,19 @@
 <% layout('layouts/boilerplate') %> 
-<h1>My Orders</h1>
 
-<p class="card-text"><small class="text-muted"><b>Delivering to: </b><%= user.username %></small></p>
-<p class="card-text"><small class="text-muted"><b>Location: </b><%= user.location %></small></p>
-<p class="card-text"><small class="text-muted"><b>E-mail: </b><%= user.email %></small></p>
+<h1>My Orders </h1>
+<br>
+<div class="card" style="width: 18rem;">
+  <div class="card-header">
+    <h5>User Info:</h5>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item"><b>User Name: </b><%= user.username %></li>
+    <li class="list-group-item"><b> Location: </b><%= user.location %></li>
+    <li class="list-group-item"><b>E-mail: </b><%= user.email %></li>
+  </ul>
+</div>
+
+ <br>
 <% for( let orders of user.order ) { %>
   <h4>the order state: 
 <% if ( orders.state  === 'Accepted'){ %>

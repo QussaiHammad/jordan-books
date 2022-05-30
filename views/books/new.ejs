@@ -22,12 +22,12 @@
 
      <div class="md-3">
      <label for="price"class="form-label">Price:</label>
-     <input class="form-control" type="number" name="book[price]" id="price"required>
+     <input class="form-control" type="number" name="book[price]" id="price" min="1" max="100" oninput="validity.valid||(value='');" required>
      <div class="valid-feedback">looks good!</div>
      </div>
       <div class="md-3">
     <label for="instock"class="form-label">In Stock:</label>
-    <input class="form-control" type="number" id="instock" name="book[instock]"required>
+    <input class="form-control" type="number" id="instock" name="book[instock]" min="0" max="100" oninput="validity.valid||(value='');" required>
     <div class="valid-feedback">looks good!</div>
     </div>
    

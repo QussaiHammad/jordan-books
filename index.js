@@ -14,6 +14,8 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const multer= require('multer')
 const upload = multer({dest:'upload/'})
+const axios = require('axios').default;
+
 
 const sanitize = require('express-mongo-sanitize')
 const helmet = require("helmet");
@@ -27,6 +29,7 @@ const {bookSchema, reviewSchema}= require('./sc')
 const Book = require('./models/book.js');
 const Review = require('./models/review');
 const User = require('./models/user')
+const Cart = require('./models/cart')
 const { find } = require('./models/book.js');
 const { render } = require('express/lib/response');
 //routing 
@@ -151,6 +154,28 @@ app.get('/',(req,res)=>{
     res.render('home')
 })
 
+app.get('/paypal/:userid',async(req,res)=>{
+const userid = await req.params.userid
+const user = await User.findById(userid)
+const usercart = await Cart.findById(user.cart).populate({
+    path: 'books',
+    populate: {
+        path:'_id',
+        path: 'name',
+        path: 'image',
+        path:'price',
+        path:'author'
+    }})
+    let total = 0
+    for(let books of usercart.books){
+        let price=books.price
+total = total + price
+}
+res.render('users/paypal',{usercart,total})
+})
+
+
+
 app.all('*', (req, res, next) => {
     next(new ExpressError('Page Not Found', 404))
 })
@@ -160,7 +185,7 @@ app.use((err, req, res, next) => {
     if (!err.message) err.message = 'Oh No, Something Went Wrong!'
     res.status(statusCode).render('error', { err })
 })
-const port= process.env.PORT || 5000
+const port= process.env.PORT || 3000
 app.listen(port, () => {
     console.log(`Serving on port ${port}`)
 })

@@ -8,9 +8,12 @@
           <% }else{ %>
             <button type="button" class="btn btn-success btn-sm">Delivered</button>
             <% } %>  
-         </h4>  
-<% for( let user of orders.user) { %>
-
+          </h4>  
+          <% for( let user of orders.user) { %>
+            
+            <p class="card-text"><small class="text-muted"><b>Delivering to: </b><%= user.username %></small></p>
+            <p class="card-text"><small class="text-muted"><b>Location: </b><%= user.location %></small></p>
+            <p class="card-text"><small class="text-muted"><b>E-mail: </b><%= user.email %></small></p> 
 <% for( let cart of orders.carts ) { %>
 
     <div class="row row-cols-1 row-cols-md-5 g-10 mb-3">
@@ -32,9 +35,6 @@
         <% } %> 
         </div>
 
-        <p class="card-text"><small class="text-muted"><b>Delivering to: </b><%= user.username %></small></p>
-        <p class="card-text"><small class="text-muted"><b>Location: </b><%= user.location %></small></p>
-        <p class="card-text"><small class="text-muted"><b>E-mail: </b><%= user.email %></small></p> 
        
         <% if ( orders.state  === 'Accepted'){ %>
             <form  method="post" action="/theorders/<%= orders._id %>">
