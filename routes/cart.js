@@ -15,13 +15,6 @@ router.post('/add-to-cart/:userid/:bookid',isLoggedIn,async(req,res)=>{
     const user = await User.findById(userid).populate('cart')
     const book = await Book.findById(bookid)
     const usercart = await Cart.findById(user.cart)
-    if(usercart === null){
-        const cart = await  new Cart
-        user.cart =  await cart._id
-        await   cart.save()
-        await   user.save()
-        
-    }
     await usercart.books.push(book)
     usercart.save()
 req.flash('success','you add a book to your cart')

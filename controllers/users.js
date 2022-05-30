@@ -23,6 +23,11 @@ module.exports.userRegister= async(req, res) => {
         const { email, username, password ,location } = req.body;
         const user = new User({ email, username ,location});
         const registeredUser = await User.register(user, password);
+        const cart = await new Cart 
+         user.cart =  await cart._id
+         await   cart.save()
+         await   user.save()
+         
         req.login(registeredUser, err => {
             if (err) return next(err);
             res.redirect('/books');
