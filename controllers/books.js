@@ -4,6 +4,7 @@ const User = require('../models/user')
 
 module.exports.index = async(req,res)=>{
     const books = await Book.find({}) 
+  
     res.render('books/index',{books})
 }
 
