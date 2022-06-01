@@ -3,9 +3,15 @@ const Book = require('../models/book.js');
 const User = require('../models/user')
 
 module.exports.index = async(req,res)=>{
+    if(req.query.name){
+  const name  =req.query.name
+  const books = await Book.find({ name :{$regex:name,$options:'i' }}) 
+  res.render('books/index',{books})
+}else{
     const books = await Book.find({}) 
-  
-    res.render('books/index',{books})
+  res.render('books/index',{books})
+}
+   
 }
 
 module.exports.newForm = 

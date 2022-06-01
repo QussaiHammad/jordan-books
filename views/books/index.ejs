@@ -1,8 +1,12 @@
 <% layout('layouts/boilerplate') %> 
     <h1>The Books</h1>
     <br>
+
+    <form class="d-flex">
+      <input class="form-control me-2" id="bar" type="search" name="name" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success" type="submit" >Search</button>
+    </form>
     <br>
-    
     <div class="row row-cols-1 row-cols-md-4 g-4 mb-4">
   <% for (let book of books){%>
     <div class="card " >
@@ -41,7 +45,14 @@
       <% } %> 
       </div>
     </div>
-    
         <% }%>
       </div>
- 
+      <% let a= 0 %> 
+      <script>
+        let bar = document.getElementById('bar');
+        bar.addEventListener('keyup',(e) =>{
+         // e.target.value
+        
+    
+        });
+      </script>

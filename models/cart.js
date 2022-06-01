@@ -5,7 +5,8 @@ const cartSchema = new Schema({
     books: [
         {
             type: Schema.Types.ObjectId,
-            ref: 'Book'
+            ref: 'Book',
+            unique:true
         }
     ],
     total:Number
